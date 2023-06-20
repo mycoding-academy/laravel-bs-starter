@@ -28,7 +28,7 @@ Route::prefix('admin')->name('admin.')->group(function() {
     
     Route::get('login', [AdminLoginController::class, 'showLoginForm'])->name('login');
     // Admin protected routes
-    Route::middleware(['auth'])->group(function() {
+    Route::middleware(['auth','role:SuperAdmin|Admin'])->group(function() {
         Route::post('logout', [AdminLoginController::class, 'logout'])->name('logout');
         Route::get('/', DashboardController::class)->name('home');
         Route::get('/dashboard', DashboardController::class)->name('dashboard');
